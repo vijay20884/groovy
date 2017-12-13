@@ -1,13 +1,13 @@
 node {
     timestamps{
         echo 'Hello World'
-		stage 'deleting dir' {
+		stage('deleting dir') {
           deleteDir()
 		}
-		stage 'checkout code' {
+		stage('checkout code') {
           checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vijay20884/groovy.git']]])
         }
-		stage 'write & type files' {
+		stage('write & type files') {
 		 bat 'cd'
          writeFile file: 'sample', text: 'def printRamu() { echo \'Hello World\'}\nreturn this;'
          writeFile file: 'sample1', text: 'Hello Preetham'
