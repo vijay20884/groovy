@@ -1,14 +1,20 @@
 node {
     timestamps{
         echo 'Hello World'
-        deleteDir()
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vijay20884/groovy.git']]])
-        bat 'cd'
-        writeFile file: 'sample', text: 'def printRamu() { echo \'Hello World\'}\nreturn this;'
-        writeFile file: 'sample1', text: 'Hello Preetham'
-        bat 'dir'
-        bat 'type sample'
-        bat 'type sample1'
+		stage 'deleting dir' {
+          deleteDir()
+		}
+		stage 'checkout code' {
+          checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vijay20884/groovy.git']]])
+        }
+		stage 'write & type files' {
+		 bat 'cd'
+         writeFile file: 'sample', text: 'def printRamu() { echo \'Hello World\'}\nreturn this;'
+         writeFile file: 'sample1', text: 'Hello Preetham'
+         bat 'dir'
+         bat 'type sample'
+         bat 'type sample1'
+		}
         def u = fileExists 'sample'
         if(u) {
             echo 'File -sample- is present'
