@@ -48,5 +48,6 @@ node {
             def b = 123
             echo '%env.a%'
         }
+		echo 'This file is in Git'
     }
 }
